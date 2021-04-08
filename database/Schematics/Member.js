@@ -12,5 +12,6 @@ module.exports = mongoose.model("Member", new mongoose.Schema({
         day: 0,
         week: 0,
         all: 0
-    }}
+    }},
+    marry: {type: String, default: null}
 }));
