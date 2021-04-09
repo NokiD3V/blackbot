@@ -13,5 +13,6 @@ module.exports = mongoose.model("Member", new mongoose.Schema({
         week: 0,
         all: 0
     }},
-    marry: {type: String, default: null}
+    marry: {type: String, default: null},
+    marry_joined: {type: Number, default: null}
 }));

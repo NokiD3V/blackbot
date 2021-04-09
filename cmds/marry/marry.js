@@ -45,6 +45,8 @@ module.exports.run = async (client, message, args) => {
         if(reaction.emoji.name == emojis[0]){
           member1.marry = user.user.id;
           member2.marry = message.author.id;
+          member1.marry_joined = Date.now()
+          member2.marry_joined = Date.now()
           client.db.setMemberDB(message.author.id, message.guild.id, member1)
           client.db.setMemberDB(user.user.id, message.guild.id, member2)
           const embed = new MessageEmbed()
@@ -78,11 +80,12 @@ module.exports.run = async (client, message, args) => {
   else if(args[0] == 'info'){
     let userdb = await client.db.getMemberDB(message.author.id, message.guild.id)
     let partner = userdb.marry
-    if(partner == null) partner = 'Никто'
-    else partner = `<@${partner}>`
+    let text = ''
+    if(partner != null) text = `**Ваш партнёр:** <@${partner}>\n**Дата брака:** ${new Date(userdb.marry_joined).toLocaleDateString("ru-RU").split('-').map(n => {if(n < 10) return `0${n}`; else return n}).reverse().join('.')} в ${new Date(userdb.marry_joined).toString().substr(16, 5)}\n**Сколько времени в браке:** ${require('ms')(Date.now() - userdb.marry_joined).replace('d', ' дней').replace('m', ' минут').replace('h', ' часов').replace('s', ' секунд')}`;
+    else text = 'У вас нет партнёра!'
     const embed = new MessageEmbed()
     .setAuthor('Информация о браке')
-    .setDescription('Ваш партнёр: ' + partner)
+    .setDescription(text)
     .setColor('#d468c3')
     message.channel.send(embed)
   }

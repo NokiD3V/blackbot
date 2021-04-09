@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args) => {
   else if(money == 'half') money = member.money / 2;
   if(Number(money) < 1) return ErrorMessages.notvalid(message, 1, 'Введите число от 1 до 1.000.000!')
   if(Number(money) > 1000000) return ErrorMessages.notvalid(message, 1, 'Введите число от 1 до 1.000.000!')
-  money = Number(money)
+  money = Math.floor(Number(money))
   if(member.money < money) return ErrorMessages.notvalid(message, 1, 'Не хватает денег')
   let num_min = 60
   let num_medium = 90
