@@ -8,7 +8,7 @@ const botconfig = require('../../botconfig.json')
 let random = require('random')
 
 module.exports.run = async (client, message, args) => {
-    var proc = 12 
+    var proc = botconfig.commisia 
     if(!args[1]) return ErrorMessages.notvalid(message, 2, "Не введены все аргументы")
     let member_args = message.guild.members.cache.get(args[0]) || message.mentions.members.first()
     if(!member_args) return ErrorMessages.notvalid(message, 1, "Не указан человек")
@@ -28,8 +28,9 @@ module.exports.run = async (client, message, args) => {
 
     const embed = new MessageEmbed()
     .setAuthor('Перевод денежных средств', message.author.displayAvatarURL({dynamic: true}))
-    .setDescription(`${message.author} перевёл **${Math.floor(moneys - (moneys/ 100 * proc))}${currency}** пользователю ${member_args}!\nВнимание! В этой команде стоит коммисия **${proc}%**! Будьте аккуратнее!`)
+    .setDescription(`${message.author} перевёл **${Math.floor(moneys - (moneys/ 100 * proc))}${currency}** пользователю ${member_args}!`)
     .setColor('#ffbe19')
+    if(proc != 0) embed.setFooter(`Внимание! В этой команде стоит коммисия ${proc}%! Будьте аккуратнее!`)
     if(args[2]) embed.addField(`Комментарий от ${message.author.tag}:`, `${args.slice(2).join(' ')}`)
     message.channel.send(embed)
 };

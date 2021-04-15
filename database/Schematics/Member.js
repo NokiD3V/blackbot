@@ -14,5 +14,9 @@ module.exports = mongoose.model("Member", new mongoose.Schema({
         all: 0
     }},
     marry: {type: String, default: null},
-    marry_joined: {type: Number, default: null}
+    marry_joined: {type: Number, default: null},
+    on_duel: {type: Boolean, default: false},
+    shot: {type: Boolean, default: false},
+    player_duel: {type: String, default: null},
+    cost_duel: {type: Number, default: 0}
 }));

@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args) => {
       .setAuthor('Победа!')
       .setDescription(`${message.author} победил и получает **${money}${currency}**!\nВаш баланс составляет: **${member.money}${currency}**`)
       .setColor('22ee77')
-      msg.edit(embed)
+      message.channel.send(embed)
   }
   else{
       member.money -= money
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
       .setAuthor('Поражение!')
       .setDescription(`${message.author} проиграл, у вас отняли **${money}${currency}**!\nВаш баланс составляет: **${member.money}${currency}**`)
       .setColor('ff2222')
-      msg.edit(embed)
+      message.channel.send(embed)
   }
   await client.db.setMemberDB(message.author.id, message.guild.id, member)
 };

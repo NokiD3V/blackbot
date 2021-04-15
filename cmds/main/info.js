@@ -10,16 +10,16 @@ module.exports.run = async (client, message, args) => {
     voicemember.voice_stats.lastconnect = String(new Date())
   }   
   client.db.setMemberDB(message.author.id, message.guild.id, voicemember)
-  let day = `${require('ms')(voicemember.voice_stats.day).replace('ms', '').replace('m', 'мин.').replace('h', 'ч.').replace('s', 'сек.').replace('d', 'дн.')}`
-  let week = `${ms(voicemember.voice_stats.week).replace('m', 'мин.').replace('h', 'ч.').replace('s', 'сек.').replace('d', 'дн.')}`
-  let all = `${ms(voicemember.voice_stats.all).replace('m', 'мин.').replace('h', 'ч.').replace('s', 'сек.').replace('d', 'дн.')}`
+  let day = `${require('ms')(voicemember.voice_stats.day).replace('ms', '').replace('m', ' мин.').replace('h', ' ч.').replace('s', ' сек.').replace('d', ' дн.')}`
+  let week = `${ms(voicemember.voice_stats.week).replace('m', ' мин.').replace('h', ' ч.').replace('s', ' сек.').replace('d', ' дн.')}`
+  let all = `${ms(voicemember.voice_stats.all).replace('m', ' мин.').replace('h', ' ч.').replace(' s', ' сек.').replace('d', ' дн.')}`
   let embed = new MessageEmbed()
   .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL({dynamic: true}))
   .setColor('#22ef1e')
   .addField('За день', day, true)
   .addField('За неделю', week, true)
   .addField('За всё время', all, true)
-  .addField('')
+  .addField('Всего сообщений', voicemember.messages)
   .setFooter(`Ваша статистика активности на сервере`, "https://media.discordapp.net/attachments/826101936054992930/826415157151399946/image1.jpg")
   message.channel.send(embed)
 }; 
